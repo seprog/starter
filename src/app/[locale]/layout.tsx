@@ -19,7 +19,7 @@ export default async function RootLayout({ children, params }: Readonly<{
   }
 
   return (
-    <html lang={locale} className='dark'>
+    <html lang={locale} className='dark' suppressHydrationWarning>
       <body>
         <Providers>
           { children }
