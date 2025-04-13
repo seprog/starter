@@ -1,0 +1,9 @@
+{
+  "navbar": {
+    "title": "Starter",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "profile": "Profil",
+    "settings": "Einstellungen"
+  }
+}
