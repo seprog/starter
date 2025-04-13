@@ -1,0 +1,17 @@
+model UserProfile {
+  userId  String @id
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  userId  String @id
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserData {
+  userId  String @id
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

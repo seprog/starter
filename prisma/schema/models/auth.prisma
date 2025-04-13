@@ -11,6 +11,10 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  UserProfile UserProfile[]
+  UserSettings UserSettings[]
+  UserData UserData[]
 }
 
 model Account {
