@@ -8,6 +8,7 @@
  - [ ] replace `starter` and `Starter` occurrences with according Project / Repository name
    - [Compose File](/docker-compose.yaml)
    - [Locale File (en)](/locales/en.json)
+   - [Locale File (de)](/locales/de.json)
    - [Environment File](/.env)
    - [Root Layout](/src/app/[locale]/layout.tsx)
    - [Readme File](/README.md)
