@@ -1,8 +1,6 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '@/app/lib/prisma'
-import Discord from 'next-auth/providers/discord'
-import Google from 'next-auth/providers/google'
 import GitHub from 'next-auth/providers/github'
 
 declare module 'next-auth' {
@@ -25,8 +23,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     })
   },
   providers: [
-    Discord,
-    Google,
     GitHub
   ]
 })
