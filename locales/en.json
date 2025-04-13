@@ -1,5 +1,9 @@
 {
-  "HomePage": {
-    "title": "Starter"
+  "navbar": {
+    "title": "Starter",
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "profile": "Profile",
+    "settings": "Settings"
   }
 }

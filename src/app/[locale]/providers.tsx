@@ -9,7 +9,7 @@ export function Providers({ children }: {
 }) {
   return (
     <HeroUIProvider>
-      <ThemeProvider attribute='class' enableSystem={true}>
+      <ThemeProvider attribute='class' enableSystem={ true }>
         <SessionProvider>
           { children }
         </SessionProvider>
