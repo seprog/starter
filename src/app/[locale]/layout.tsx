@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import '../globals.css'
 import { Providers } from './providers'
-import { hasLocale } from 'next-intl'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 
@@ -21,9 +21,11 @@ export default async function RootLayout({ children, params }: Readonly<{
   return (
     <html lang={locale} className='dark' suppressHydrationWarning>
       <body>
-        <Providers>
-          { children }
-        </Providers>
+        <NextIntlClientProvider>
+          <Providers>
+            { children }
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
