@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
-    "@heroui/react": "^2.8.0-beta.0",
+    "@heroui/react": "^2.8.0-beta.2",
     "@prisma/client": "^6.6.0",
     "framer-motion": "^12.6.5",
     "next": "^15.3.0",
