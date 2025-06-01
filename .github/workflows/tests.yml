@@ -30,7 +30,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build
+      - name: Build App
         uses: docker/build-push-action@v6
         with:
           load: true
@@ -66,12 +66,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build
+      - name: Build App
         uses: docker/build-push-action@v6
         with:
           load: true
           push: false
           tags: ghcr.io/${{ github.repository }}:latest
+
+      - name: Start App and DB
+        run: |
+          docker compose up -d app db
+          bun run db:push
 
       - name: Run Cypress E2E Tests
         uses: cypress-io/github-action@v6
