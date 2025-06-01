@@ -30,7 +30,6 @@ jobs:
 
   cypress_component:
     name: Cypress Component Tests
-    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -46,20 +45,7 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build App
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          push: false
-          tags: ghcr.io/${{ github.repository }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - uses: build
 
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
@@ -85,20 +71,7 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build App
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          push: false
-          tags: ghcr.io/${{ github.repository }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - uses: build
 
       - name: Start Container
         run: |
