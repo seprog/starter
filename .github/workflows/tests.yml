@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  install:
-    name: Install
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,18 +24,13 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - name: Cache save bun
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.bun
-            node_modules
-          key: bun-${{ hashFiles('**/bun.lock') }}
-
       - name: Cache save cypress
         uses: actions/cache/save@v4
         with:
-          path: ~/.cache/Cypress
+          path: |
+            node_modules
+            ~/.bun
+            ~/.cache/Cypress
           key: cypress-${{ hashFiles('**/bun.lock') }}
 
 #      - name: Set up QEMU
@@ -53,7 +48,7 @@ jobs:
 
   cypress_component:
     name: Cypress Component
-    needs: install
+    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -61,19 +56,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache restore bun
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            ~/.bun
-            node_modules
-          key: bun-${{ hashFiles('**/bun.lock') }}
-
       - name: Cache restore cypress
         uses: actions/cache/restore@v4
         with:
-          path: ~/.cache/Cypress
+          path: |
+            node_modules
+            ~/.bun
+            ~/.cache/Cypress
           key: cypress-${{ hashFiles('**/bun.lock') }}
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -96,7 +89,7 @@ jobs:
 
   cypress_e2e:
     name: Cypress E2E
-    needs: install
+    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -104,19 +97,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache restore bun
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            ~/.bun
-            node_modules
-          key: bun-${{ hashFiles('**/bun.lock') }}
-
       - name: Cache restore cypress
         uses: actions/cache/restore@v4
         with:
-          path: ~/.cache/Cypress
+          path: |
+            node_modules
+            ~/.bun
+            ~/.cache/Cypress
           key: cypress-${{ hashFiles('**/bun.lock') }}
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
