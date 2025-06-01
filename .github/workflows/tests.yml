@@ -8,11 +8,8 @@ on:
 
 jobs:
   install:
-    name: Install Node Modules
+    name: Install
     runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:22.15.0
-      options: --user 1001
     permissions:
       contents: read
     steps:
@@ -22,18 +19,35 @@ jobs:
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v6
+      - name: Cache node modules
+        uses: actions/cache@v4
         with:
-          install-command: bun install
-          runTests: false
+          path: ~/.bun
+          key: ${{ runner.os }}-node-${{ hashFiles('**/bun.lock') }}
 
-      - name: Save build artifacts
+      - name: Cache Cypress binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/bun.lock') }}
+
+      - name: Cypress install
+        run: |
+          bun install cypress
+          bun cypress install
+
+      - name: Save node module artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: node_modules
           if-no-files-found: error
-          path: build
+          path: ~/.bun
+      - name: Save cypress binary artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress
+          if-no-files-found: error
+          path: ~/.cache/Cypress
 
   cypress_component:
     name: Cypress Component
@@ -42,11 +56,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Load build artifacts
+      - name: Load node module artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: build
+          name: node_modules
+          path: ~/.bun
+      - name: Load cypress binary artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cypress
+          path: ~/.cache/Cypress
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -74,11 +93,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Load build artifacts
+      - name: Load node module artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: build
+          name: node_modules
+          path: ~/.bun
+      - name: Load cypress binary artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cypress
+          path: ~/.cache/Cypress
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
