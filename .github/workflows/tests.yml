@@ -7,7 +7,8 @@ on:
   pull_request:
 
 jobs:
-  cypress:
+  install:
+    name: Install Node Modules
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,6 +20,26 @@ jobs:
         uses: oven-sh/setup-bun@v2
       - name: Install Dependencies
         run: bun install
+
+      - name: Save node_module artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: node_modules
+          if-no-files-found: error
+          path: node_modules
+
+  cypress_component:
+    name: Cypress Component
+    needs: install
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Load node_module artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+          path: node_modules
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -33,19 +54,39 @@ jobs:
           push: false
           tags: ghcr.io/${{ github.repository }}:latest
 
-      - name: Start Container
-        run: docker compose up -d
-
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
           component: true
 
+  cypress_e2e:
+    name: Cypress E2E
+    needs: install
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Load node_module artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+          path: node_modules
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          push: false
+          tags: ghcr.io/${{ github.repository }}:latest
+
       - name: Run Cypress E2E Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-
-      - name: Stop Container
-        run: docker compose down
