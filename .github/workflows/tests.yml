@@ -36,13 +36,13 @@ jobs:
       - name: Start Container
         run: docker compose up -d
 
-      - name: Run Component Testing
+      - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
           component: true
 
-      - name: Run E2E Testing
+      - name: Run Cypress E2E Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
