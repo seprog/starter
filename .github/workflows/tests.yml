@@ -20,6 +20,9 @@ jobs:
 
       - name: Build
         uses: docker/build-push-action@v6
+        with:
+          push: false
+          tags: ghcr.io/${{ github.repository }}:latest
 
   cypress:
     needs: build
@@ -37,15 +40,21 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           load: true
+          push: false
+          tags: ghcr.io/${{ github.repository }}:latest
 
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
-
       - name: Install Dependencies
         run: bun install
+
+      - name: Start Container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/${{ github.repository }}:latest
 
       - name: Run Cypress E2E Tests
         run: bun run cypress:e2e:headless
