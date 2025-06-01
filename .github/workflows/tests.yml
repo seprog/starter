@@ -10,6 +10,9 @@ jobs:
   install:
     name: Install Node Modules
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:22.15.0
+      options: --user 1001
     permissions:
       contents: read
     steps:
@@ -18,15 +21,19 @@ jobs:
 
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
-      - name: Install Dependencies
-        run: bun install
 
-      - name: Save node_module artifacts
+      - name: Cypress install
+        uses: cypress-io/github-action@v6
+        with:
+          install-command: bun install
+          runTests: false
+
+      - name: Save build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: node_modules
+          name: build
           if-no-files-found: error
-          path: node_modules
+          path: build
 
   cypress_component:
     name: Cypress Component
@@ -35,11 +42,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Load node_module artifacts
+      - name: Load build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: node_modules
-          path: node_modules
+          name: build
+          path: build
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -67,11 +74,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Load node_module artifacts
+      - name: Load build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: node_modules
-          path: node_modules
+          name: build
+          path: build
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
