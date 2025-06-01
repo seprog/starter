@@ -29,16 +29,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Install Dependencies
+        run: bun install
 
-      - name: Build
-        uses: docker/build-push-action@v6
+      - name: Build App
+        run: bun run docker:build
+      - name: Start App
+        run: bun run docker:build
 
-      - name: Compose Up
-        run: docker compose up -d
-      - name: Compose Down
-        run: docker compose down
+      - name: Run Cypress E2E Tests
+        run: bun run cypress:e2e:headless
+      - name: Run Cypress Component Tests
+        run: bun run cypress:component:headless
