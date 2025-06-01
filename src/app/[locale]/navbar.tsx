@@ -1,9 +1,9 @@
 'use client'
 
 import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, User } from '@heroui/react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/navigation'
 import { LuLogIn, LuLogOut, LuSettings, LuUser } from 'react-icons/lu'
 
 export function MainNavbar({ items }: {
@@ -13,6 +13,7 @@ export function MainNavbar({ items }: {
   }[]
 }) {
   const t = useTranslations('navbar')
+  const locale = useLocale()
 
   return (
     <Navbar isBlurred isBordered maxWidth='full'>
@@ -26,7 +27,7 @@ export function MainNavbar({ items }: {
         <Link
           className='text-xl font-bold'
           color='foreground'
-          href={window.origin}
+          href={`/${locale}`}
         >{ t('title') }</Link>
       </NavbarBrand>
       <NavbarContent className='not-md:hidden'>
