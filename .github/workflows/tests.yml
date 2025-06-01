@@ -27,6 +27,17 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -36,17 +47,7 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
-      - name: Build App
-        run: docker compose build
-      - name: Start DB and App
-        run: docker compose up -d db app
-      - name: Initialize DB
-        run: bun run db:push
-
       - name: Run Cypress E2E Tests
         run: bun run cypress:e2e:headless
       - name: Run Cypress Component Tests
         run: bun run cypress:component:headless
-
-      - name: Stop DB and App
-        run: docker compose down
