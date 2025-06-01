@@ -52,11 +52,12 @@ jobs:
         run: bun install
 
       - name: Start Container
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ghcr.io/${{ github.repository }}:latest
+        run: docker compose up -d
 
       - name: Run Cypress E2E Tests
         run: bun run cypress:e2e:headless
       - name: Run Cypress Component Tests
         run: bun run cypress:component:headless
+
+      - name: Stop Container
+        run: docker compose down
