@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  install:
-    name: Install
+  cypress_component:
+    name: Cypress Component
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,53 +19,10 @@ jobs:
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.bun
-          key: ${{ runner.os }}-node-${{ hashFiles('**/bun.lock') }}
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/bun.lock') }}
-
-      - name: Cypress install
+      - name: Set up Cypress
         run: |
           bun install cypress
           bun cypress install
-
-      - name: Save node module artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: node_modules
-          if-no-files-found: error
-          path: node_modules
-      - name: Save cypress binary artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress
-          if-no-files-found: error
-          path: ~/.cache/Cypress
-
-  cypress_component:
-    name: Cypress Component
-    needs: install
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Load node module artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: node_modules
-          path: node_modules
-      - name: Load cypress binary artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: cypress
-          path: ~/.cache/Cypress
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -88,21 +45,20 @@ jobs:
 
   cypress_e2e:
     name: Cypress E2E
-    needs: install
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Load node module artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: node_modules
-          path: node_modules
-      - name: Load cypress binary artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: cypress
-          path: ~/.cache/Cypress
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Set up Cypress
+        run: |
+          bun install cypress
+          bun cypress install
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
