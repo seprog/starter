@@ -22,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v6
 
   cypress:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -36,11 +37,16 @@ jobs:
         run: bun install
 
       - name: Build App
-        run: bun run docker:build
-      - name: Start App
-        run: bun run docker:up
+        run: docker compose build
+      - name: Start DB and App
+        run: docker compose up -d db app
+      - name: Initialize DB
+        run: bun run db:push
 
       - name: Run Cypress E2E Tests
         run: bun run cypress:e2e:headless
       - name: Run Cypress Component Tests
         run: bun run cypress:component:headless
+
+      - name: Stop DB and App
+        run: docker compose down
