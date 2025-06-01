@@ -26,17 +26,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build
-        uses: docker/build-push-action@v6
-
-      - name: Cypress E2E
-        run: bun run cypress:e2e:headless
-
-      - name: Cypress Component
-        run: bun run cypress:component:headless
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
