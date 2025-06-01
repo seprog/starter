@@ -16,6 +16,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache bun
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun
+          key: bun-${{ hashFiles('**/bun.lock') }}
+
+      - name: Cache cypress
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ hashFiles('**/bun.lock') }}
+
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
 
@@ -51,6 +63,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Cache bun
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun
+          key: bun-${{ hashFiles('**/bun.lock') }}
+
+      - name: Cache cypress
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ hashFiles('**/bun.lock') }}
 
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
