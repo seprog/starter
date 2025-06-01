@@ -28,10 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
+      - name: Cypress E2E Tests
+        run: bun run cypress:e2e:headless
+      - name: Cypress Component Tests
+        run: bun run cypress:component:headless
