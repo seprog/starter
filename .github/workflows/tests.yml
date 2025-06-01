@@ -38,7 +38,7 @@ jobs:
       - name: Build App
         run: bun run docker:build
       - name: Start App
-        run: bun run docker:build
+        run: bun run docker:up
 
       - name: Run Cypress E2E Tests
         run: bun run cypress:e2e:headless
