@@ -5,6 +5,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+
+    "cypress:e2e": "start-server-and-test docker:up http://localhost:3000 \"cypress open --e2e\"",
+    "cypress:e2e:headless": "start-server-and-test docker:up http://localhost:3000 \"cypress run --e2e\"",
+    "cypress:component": "cypress open --component",
+    "cypress:component:headless": "cypress run --component",
+
     "docker:build": "docker compose build",
     "docker:up": "docker compose up",
     "docker:down": "docker compose down",
@@ -25,6 +31,7 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-stately": "^3.38.0",
+    "start-server-and-test": "^2.0.12",
     "swr": "^2.3.3",
     "zod": "^3.25.42"
   },
@@ -34,6 +41,7 @@
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
+    "cypress": "^14.4.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.3",
     "postcss": "^8.5.4",
