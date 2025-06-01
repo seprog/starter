@@ -49,7 +49,7 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - uses: ./.github/actions/build_container
+      - uses: ./.github/actions/build
 
       - name: Start Container
         run: |
