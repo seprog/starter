@@ -41,6 +41,11 @@ jobs:
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Set up cypress
+        run: |
+          bun install cypress
+          bun cypress install
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
