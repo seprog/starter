@@ -28,7 +28,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  cypress:
+  cypress_e2e:
     name: Cypress
     needs: build
     runs-on: ubuntu-latest
@@ -73,6 +73,39 @@ jobs:
 
       - name: Stop Container
         run: docker compose down -v
+
+  cypress_component:
+    name: Cypress
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Set up cypress
+        run: |
+          bun install cypress
+          bun cypress install
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build App
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          push: false
+          tags: ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
