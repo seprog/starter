@@ -1,0 +1,21 @@
+jobs:
+  build_container:
+    name: Build Docker Container
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build App
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          push: false
+          tags: ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
