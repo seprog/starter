@@ -36,11 +36,6 @@ jobs:
       - name: Start Container
         run: docker compose up -d
 
-      - name: Run Cypress Component Tests
-        run: bun run cypress:component:headless
-      - name: Run Cypress E2E Tests
-        run: bun run cypress:e2e:headless
-
       - name: Run Component Testing
         uses: cypress-io/github-action@v6
         with:
