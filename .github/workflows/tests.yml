@@ -24,7 +24,7 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - uses: ./.github/workflows/build_container
+      - uses: ./.github/workflows/build_container.yml
 
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
@@ -49,7 +49,7 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - uses: ./.github/workflows/build
+      - uses: ./.github/workflows/build_container.yml
 
       - name: Start Container
         run: |
