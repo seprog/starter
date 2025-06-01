@@ -16,18 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache bun
-        uses: actions/cache@v4
-        with:
-          path: ~/.bun
-          key: bun-${{ hashFiles('**/bun.lock') }}
-
-      - name: Cache cypress
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-${{ hashFiles('**/bun.lock') }}
-
       - name: Set up bun
         uses: oven-sh/setup-bun@v2
 
@@ -36,18 +24,32 @@ jobs:
           bun install cypress
           bun cypress install
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build App
-        uses: docker/build-push-action@v6
+      - name: Cache save bun
+        uses: actions/cache/save@v4
         with:
-          load: true
-          push: false
-          tags: ghcr.io/${{ github.repository }}:latest
+          path: |
+            ~/.bun
+            node_modules
+          key: bun-${{ hashFiles('**/bun.lock') }}
+
+      - name: Cache save cypress
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ hashFiles('**/bun.lock') }}
+
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v3
+#
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v3
+#
+#      - name: Build App
+#        uses: docker/build-push-action@v6
+#        with:
+#          load: true
+#          push: false
+#          tags: ghcr.io/${{ github.repository }}:latest
 
   cypress_component:
     name: Cypress Component
@@ -59,14 +61,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache bun
-        uses: actions/cache@v4
+      - name: Cache restore bun
+        uses: actions/cache/restore@v4
         with:
-          path: ~/.bun
+          path: |
+            ~/.bun
+            node_modules
           key: bun-${{ hashFiles('**/bun.lock') }}
 
-      - name: Cache cypress
-        uses: actions/cache@v4
+      - name: Cache restore cypress
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/Cypress
           key: cypress-${{ hashFiles('**/bun.lock') }}
@@ -100,14 +104,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache bun
-        uses: actions/cache@v4
+      - name: Cache restore bun
+        uses: actions/cache/restore@v4
         with:
-          path: ~/.bun
+          path: |
+            ~/.bun
+            node_modules
           key: bun-${{ hashFiles('**/bun.lock') }}
 
-      - name: Cache cypress
-        uses: actions/cache@v4
+      - name: Cache restore cypress
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/Cypress
           key: cypress-${{ hashFiles('**/bun.lock') }}
