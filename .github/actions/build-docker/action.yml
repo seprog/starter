@@ -1,6 +1,6 @@
 name: Build Docker Container
 
-description: Builds a Docker Container
+description: Builds and caches the Docker Container
 
 runs:
   using: composite
