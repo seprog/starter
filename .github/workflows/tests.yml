@@ -42,7 +42,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-electron-e2e:
     name: Cypress Electron E2E Tests
@@ -77,7 +77,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-chrome-component:
     name: Cypress Chrome Component Tests
@@ -105,7 +105,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-chrome-e2e:
     name: Cypress Chrome E2E Tests
@@ -141,7 +141,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-firefox-component:
     name: Cypress Firefox Component Tests
@@ -169,7 +169,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-firefox-e2e:
     name: Cypress Firefox E2E Tests
@@ -205,7 +205,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-edge-component:
     name: Cypress Edge Component Tests
@@ -233,7 +233,7 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
 
   cypress-edge-e2e:
     name: Cypress Edge E2E Tests
@@ -269,4 +269,4 @@ jobs:
         if: failure()
         with:
             name: ${{ github.job }}-snapshots
-            path: cypress/snapshots
+            path: ./cypress/snapshots
