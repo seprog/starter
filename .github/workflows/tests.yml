@@ -7,8 +7,12 @@ on:
   pull_request:
 
 jobs:
+  call-build-docker:
+    uses: ./.github/workflows/build-docker.yml
+
   cypress_component:
     name: Cypress Component Tests
+    needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +27,7 @@ jobs:
           bun cypress install
 
       - name: Build Docker Container
-        uses: ./.github/workflows/build/docker.yml
+        uses: ./.github/workflows/build-docker.yml
 
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
@@ -33,6 +37,7 @@ jobs:
 
   cypress_e2e:
     name: Cypress E2E Tests
+    needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,7 +52,7 @@ jobs:
           bun cypress install
 
       - name: Build Docker Container
-        uses: ./.github/workflows/build/docker.yml
+        uses: ./.github/workflows/build-docker.yml
 
       - name: Start Docker Container
         run: |
