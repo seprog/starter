@@ -37,6 +37,13 @@ jobs:
           install: false
           component: true
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
+
   cypress-electron-e2e:
     name: Cypress Electron E2E Tests
     needs: call-build-docker
@@ -65,6 +72,13 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
+
   cypress-chrome-component:
     name: Cypress Chrome Component Tests
     needs: call-build-docker
@@ -85,6 +99,13 @@ jobs:
           install: false
           component: true
           browser: chrome
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
 
   cypress-chrome-e2e:
     name: Cypress Chrome E2E Tests
@@ -115,6 +136,12 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
 
   cypress-firefox-component:
     name: Cypress Firefox Component Tests
@@ -136,6 +163,13 @@ jobs:
           install: false
           component: true
           browser: firefox
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
 
   cypress-firefox-e2e:
     name: Cypress Firefox E2E Tests
@@ -166,6 +200,12 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
 
   cypress-edge-component:
     name: Cypress Edge Component Tests
@@ -187,6 +227,13 @@ jobs:
           install: false
           component: true
           browser: edge
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
 
   cypress-edge-e2e:
     name: Cypress Edge E2E Tests
@@ -216,3 +263,10 @@ jobs:
 
       - name: Stop Docker Container
         run: docker compose down -v
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+            name: ${{ github.job }}-snapshots
+            path: cypress/snapshots
