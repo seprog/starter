@@ -29,7 +29,7 @@ export default async function RootLayout({ children, params }: Readonly<{
             <MainNavbar items={[
               { key: 'item1', content: <>Item 1</> },
               { key: 'item2', content: <>Item 2</> }
-            ]}/>
+            ]} />
             { children }
           </Providers>
         </NextIntlClientProvider>

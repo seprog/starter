@@ -1,0 +1,16 @@
+name: Build Docker Container
+
+description: Builds and caches the Docker Container
+
+runs:
+  using: composite
+  steps:
+    - uses: docker/setup-qemu-action@v3
+    - uses: docker/setup-buildx-action@v3
+    - uses: docker/build-push-action@v6
+      with:
+        load: true
+        push: false
+        tags: ghcr.io/${{ github.repository }}:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max

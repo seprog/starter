@@ -7,16 +7,127 @@ on:
   pull_request:
 
 jobs:
-  build:
+  call-build-docker:
+    name: Build Docker Container
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Build Docker Container
+        uses: ./.github/actions/build-docker
 
-      - name: Build
-        uses: docker/build-push-action@v6
+  cypress-electron:
+    name: Cypress Electron
+    needs: call-build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up cypress
+        uses: ./.github/actions/setup-cypress
+
+      - name: Build Docker Container
+        uses: ./.github/actions/build-docker
+
+      - name: Start Docker Container
+        run: |
+          docker compose up -d app db
+          bun run db:push
+
+      - name: Run Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          wait-on: http://localhost:3000
+
+      - name: Stop Docker Container
+        run: docker compose down -v
+
+  cypress-chrome:
+    name: Cypress Chrome
+    needs: call-build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up cypress
+        uses: ./.github/actions/setup-cypress
+
+      - name: Build Docker Container
+        uses: ./.github/actions/build-docker
+
+      - name: Start Docker Container
+        run: |
+          docker compose up -d app db
+          bun run db:push
+
+      - name: Run Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          wait-on: http://localhost:3000
+          browser: chrome
+
+      - name: Stop Docker Container
+        run: docker compose down -v
+
+  cypress-firefox:
+    name: Cypress Firefox
+    needs: call-build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up cypress
+        uses: ./.github/actions/setup-cypress
+
+      - name: Build Docker Container
+        uses: ./.github/actions/build-docker
+
+      - name: Start Docker Container
+        run: |
+          docker compose up -d app db
+          bun run db:push
+
+      - name: Run Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          wait-on: http://localhost:3000
+          browser: firefox
+
+      - name: Stop Docker Container
+        run: docker compose down -v
+
+  cypress-edge:
+    name: Cypress Edge
+    needs: call-build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up cypress
+        uses: ./.github/actions/setup-cypress
+
+      - name: Build Docker Container
+        uses: ./.github/actions/build-docker
+
+      - name: Start Docker Container
+        run: |
+          docker compose up -d app db
+          bun run db:push
+
+      - name: Run Tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          wait-on: http://localhost:3000
+          browser: edge
+
+      - name: Stop Docker Container
+        run: docker compose down -v
