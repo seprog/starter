@@ -10,6 +10,7 @@ jobs:
   call-tests:
     name: Run Tests
     uses: ./.github/workflows/tests.yml
+
   publish:
     name: Publish
     needs: call-tests

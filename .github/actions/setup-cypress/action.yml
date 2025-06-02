@@ -10,4 +10,3 @@ runs:
       run: |
         bun install cypress
         bun cypress install
-
