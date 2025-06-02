@@ -21,7 +21,7 @@
    - run `bun run db:push`
 
 ### Done
-Everyithing is set, happy developing.
+Everything is set, happy developing.
  - Development
    - `bun run db:up` (ensure db is running)
    - `bun run dev`
