@@ -8,9 +8,10 @@ on:
 
 jobs:
   call-build-docker:
+    name: Build Docker Container
     uses: ./.github/workflows/build-docker.yml
 
-  cypress_component:
+  cypress-component:
     name: Cypress Component Tests
     needs: call-build-docker
     runs-on: ubuntu-latest
@@ -35,7 +36,7 @@ jobs:
           install: false
           component: true
 
-  cypress_e2e:
+  cypress-e2e:
     name: Cypress E2E Tests
     needs: call-build-docker
     runs-on: ubuntu-latest
