@@ -11,6 +11,9 @@ jobs:
     name: Build Docker Container
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build Docker Container
         uses: ./.github/actions/build-docker
 
