@@ -9,7 +9,10 @@ on:
 jobs:
   call-build-docker:
     name: Build Docker Container
-    uses: ./.github/workflows/build-docker.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker Container
+        uses: ./.github/workflows/build-docker.yml
 
   cypress-component:
     name: Cypress Component Tests
