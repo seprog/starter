@@ -25,13 +25,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up bun
-        uses: oven-sh/setup-bun@v2
-
       - name: Set up cypress
-        run: |
-          bun install cypress
-          bun cypress install
+        uses: ./.github/actions/setup-cypress
 
       - name: Build Docker Container
         uses: ./.github/actions/build-docker
@@ -50,13 +45,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up bun
-        uses: oven-sh/setup-bun@v2
-
       - name: Set up cypress
-        run: |
-          bun install cypress
-          bun cypress install
+        uses: ./.github/actions/setup-cypress
 
       - name: Build Docker Container
         uses: ./.github/actions/build-docker
