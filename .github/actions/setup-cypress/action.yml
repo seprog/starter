@@ -5,11 +5,8 @@ description: Setup Cypress testing environment
 runs:
   using: composite
   steps:
-    - name: Set up bun
-      uses: oven-sh/setup-bun@v2
-
-    - name: Set up cypress
-      shell: sh
+    - uses: oven-sh/setup-bun@v2
+    - shell: sh
       run: |
         bun install cypress
         bun cypress install
