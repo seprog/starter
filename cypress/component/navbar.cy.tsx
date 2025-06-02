@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 describe('Main Navbar', () => {
   it('displays title', () => {
     const t = useTranslations('navbar')
-    cy.mount(<MainNavbar />)
+    cy.mount(<MainNavbar />).screenshot()
     cy.get('a').contains(t('title'))
   })
 })
