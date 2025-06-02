@@ -60,6 +60,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false
+          wait-on: http://localhost:3000
 
       - name: Stop Docker Container
         run: docker compose down -v
