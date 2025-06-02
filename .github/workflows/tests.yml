@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker Container
-        uses: ./.github/actions/build-docker.yml
+        uses: ./.github/actions/build-docker
 
   cypress-component:
     name: Cypress Component Tests
