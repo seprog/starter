@@ -8,8 +8,6 @@
 
     "cypress:e2e": "start-server-and-test docker:up http://localhost:3000 \"cypress open --e2e\"",
     "cypress:e2e:headless": "start-server-and-test docker:up http://localhost:3000 \"cypress run --e2e\"",
-    "cypress:component": "cypress open --component",
-    "cypress:component:headless": "cypress run --component",
 
     "docker:build": "docker compose build",
     "docker:up": "docker compose up",

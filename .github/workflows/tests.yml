@@ -17,28 +17,8 @@ jobs:
       - name: Build Docker Container
         uses: ./.github/actions/build-docker
 
-  cypress-electron-component:
-    name: Cypress Electron Component Tests
-    needs: call-build-docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up cypress
-        uses: ./.github/actions/setup-cypress
-
-      - name: Build Docker Container
-        uses: ./.github/actions/build-docker
-
-      - name: Run Cypress Component Tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          component: true
-
-  cypress-electron-e2e:
-    name: Cypress Electron E2E Tests
+  cypress-electron:
+    name: Cypress Electron
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -56,7 +36,7 @@ jobs:
           docker compose up -d app db
           bun run db:push
 
-      - name: Run Cypress E2E Tests
+      - name: Run Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
@@ -65,29 +45,8 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
-  cypress-chrome-component:
-    name: Cypress Chrome Component Tests
-    needs: call-build-docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up cypress
-        uses: ./.github/actions/setup-cypress
-
-      - name: Build Docker Container
-        uses: ./.github/actions/build-docker
-
-      - name: Run Cypress Component Tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          component: true
-          browser: chrome
-
-  cypress-chrome-e2e:
-    name: Cypress Chrome E2E Tests
+  cypress-chrome:
+    name: Cypress Chrome
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -105,7 +64,7 @@ jobs:
           docker compose up -d app db
           bun run db:push
 
-      - name: Run Cypress E2E Tests
+      - name: Run Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
@@ -115,29 +74,8 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
-  cypress-firefox-component:
-    name: Cypress Firefox Component Tests
-    needs: call-build-docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up cypress
-        uses: ./.github/actions/setup-cypress
-
-      - name: Build Docker Container
-        uses: ./.github/actions/build-docker
-
-      - name: Run Cypress Component Tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          component: true
-          browser: firefox
-
-  cypress-firefox-e2e:
-    name: Cypress Firefox E2E Tests
+  cypress-firefox:
+    name: Cypress Firefox
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -155,7 +93,7 @@ jobs:
           docker compose up -d app db
           bun run db:push
 
-      - name: Run Cypress E2E Tests
+      - name: Run Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
@@ -165,29 +103,8 @@ jobs:
       - name: Stop Docker Container
         run: docker compose down -v
 
-  cypress-edge-component:
-    name: Cypress Edge Component Tests
-    needs: call-build-docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up cypress
-        uses: ./.github/actions/setup-cypress
-
-      - name: Build Docker Container
-        uses: ./.github/actions/build-docker
-
-      - name: Run Cypress Component Tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          component: true
-          browser: edge
-
-  cypress-edge-e2e:
-    name: Cypress Edge E2E Tests
+  cypress-edge:
+    name: Cypress Edge
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -205,7 +122,7 @@ jobs:
           docker compose up -d app db
           bun run db:push
 
-      - name: Run Cypress E2E Tests
+      - name: Run Tests
         uses: cypress-io/github-action@v6
         with:
           install: false
