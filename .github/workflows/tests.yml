@@ -28,7 +28,7 @@ jobs:
           bun cypress install
 
       - name: Build Docker Container
-        uses: ./.github/workflows/build-docker.yml
+        uses: ./.github/actions/build-docker
 
       - name: Run Cypress Component Tests
         uses: cypress-io/github-action@v6
@@ -53,7 +53,7 @@ jobs:
           bun cypress install
 
       - name: Build Docker Container
-        uses: ./.github/workflows/build-docker.yml
+        uses: ./.github/actions/build-docker
 
       - name: Start Docker Container
         run: |
