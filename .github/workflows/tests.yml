@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/build-docker
 
   cypress-electron-component:
-    name: Cypress Component Tests
+    name: Cypress Component Tests (Electron)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +38,7 @@ jobs:
           component: true
 
   cypress-electron-e2e:
-    name: Cypress E2E Tests
+    name: Cypress E2E Tests (Electron)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -66,7 +66,7 @@ jobs:
         run: docker compose down -v
 
   cypress-chrome-component:
-    name: Cypress Component Tests
+    name: Cypress Component Tests (Chrome)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
           browser: chrome
 
   cypress-chrome-e2e:
-    name: Cypress E2E Tests
+    name: Cypress E2E Tests (Chrome)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -117,7 +117,7 @@ jobs:
 
 
   cypress-firefox-component:
-    name: Cypress Component Tests
+    name: Cypress Component Tests (Firefox)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -138,7 +138,7 @@ jobs:
           browser: firefox
 
   cypress-firefox-e2e:
-    name: Cypress E2E Tests
+    name: Cypress E2E Tests (Firefox)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -168,7 +168,7 @@ jobs:
 
 
   cypress-edge-component:
-    name: Cypress Component Tests
+    name: Cypress Component Tests (Edge)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
@@ -189,7 +189,7 @@ jobs:
           browser: edge
 
   cypress-edge-e2e:
-    name: Cypress E2E Tests
+    name: Cypress E2E Tests (Edge)
     needs: call-build-docker
     runs-on: ubuntu-latest
     steps:
