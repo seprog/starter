@@ -7,13 +7,19 @@ on:
       - main
 
 jobs:
+  call-build-docker:
+    name: Build
+    uses: ./.github/workflows/build.yml
+
   call-tests:
-    name: Run Tests
+    name: Test
     uses: ./.github/workflows/tests.yml
 
   publish:
     name: Publish
-    needs: call-tests
+    needs:
+      - call-build-docker
+      - call-tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -35,6 +41,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          load: true
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
