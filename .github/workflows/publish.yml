@@ -8,7 +8,7 @@ on:
 
 jobs:
   call-tests:
-    name: Run Tests
+    name: Test
     uses: ./.github/workflows/tests.yml
 
   publish:
