@@ -7,13 +7,13 @@ on:
   pull_request:
 
 jobs:
-  call-build-docker:
+  call-build:
     name: Build
     uses: ./.github/workflows/build.yml
 
   cypress-electron:
     name: Cypress Electron
-    needs: call-build-docker
+    needs: call-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,7 +41,7 @@ jobs:
 
   cypress-chrome:
     name: Cypress Chrome
-    needs: call-build-docker
+    needs: call-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
 
   cypress-firefox:
     name: Cypress Firefox
-    needs: call-build-docker
+    needs: call-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -99,7 +99,7 @@ jobs:
 
   cypress-edge:
     name: Cypress Edge
-    needs: call-build-docker
+    needs: call-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
