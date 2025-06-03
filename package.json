@@ -31,7 +31,7 @@
     "react-stately": "^3.38.0",
     "start-server-and-test": "^2.0.12",
     "swr": "^2.3.3",
-    "zod": "^3.25.42"
+    "zod": "^3.25.48"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
