@@ -1,10 +1,11 @@
-name: Build Docker Container
+name: Build Project
 
 on:
   workflow_call:
 
 jobs:
-  call-build-docker:
+  docker:
+    name: Docker
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU

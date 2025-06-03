@@ -9,7 +9,7 @@ on:
 jobs:
   call-build-docker:
     name: Build
-    uses: ./.github/workflows/build-docker.yml
+    uses: ./.github/workflows/build.yml
 
   cypress-electron:
     name: Cypress Electron
