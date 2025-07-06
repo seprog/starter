@@ -1,35 +1,60 @@
 # Starter
 
+Template Project including:
+
+- Next
+- Docker
+- Zod
+- Localization
+  - Next Intl (Default Setup: `en` & `de`)
+- UI
+  - Next Themes
+  - Framer Motion
+  - React Icons
+  - QR Code React
+  - Hero UI
+- DB
+  - Convex
+- Auth
+  - Clerk
+- CI & Test
+  - GitHub
+  - Cypress
+
+
 ## TODO
- - [ ] install dependencies
-   - run `bun install`
- - [ ] replace `ghcr.io/seprog/starter:latest` with according GitHub Container Registry image
-   - [Compose File](/docker-compose.yaml)
- - [ ] replace `starter` and `Starter` occurrences with according Project / Repository name
-   - [Compose File](/docker-compose.yaml)
-   - [Locale File (en)](/locales/en.json)
-   - [Locale File (de)](/locales/de.json)
-   - [Environment File](/.env)
-   - [Root Layout](/src/app/[locale]/layout.tsx)
-   - [Readme File](/README.md)
- - [ ] generate new auth secret
-   - [Environment File](/.env)
- - [ ] add / remove auth provider
-   - [Environment File](/.env)
-   - [Auth File](/src/app/lib/auth.ts)
- - [ ] update db
-   - run `bun run db:push`
+Steps to setup the project.
+- [ ] install dependencies
+  - run `bun install`
+- [ ] replace `ghcr.io/seprog/starter:latest` with according GitHub Container Registry image
+  - [Compose File](/docker-compose.yaml)
+- [ ] replace `starter` and `Starter` occurrences with according Project / Repository name
+  - [Compose File](/docker-compose.yaml)
+  - [Locale File (en)](/locales/en.json)
+  - [Locale File (de)](/locales/de.json)
+  - [Root Layout](/src/app/[locale]/layout.tsx)
+  - [Readme File](/README.md)
+- [ ] set environment variables (e.g. [.env file](/.env))
+  - Convex ([Dashboard](https://dashboard.convex.dev))
+    - `CONVEX_DEPLOYMENT`
+    - `NEXT_PUBLIC_CONVEX_URL`
+  - Clerk ([Dashboard](https://dashboard.clerk.com))
+    - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+    - `CLERK_SECRET_KEY`
+    - `NEXT_PUBLIC_CLERK_FRONTEND_API_URL`
+      - also needs to be set in Convex Dashboard / Project / Settings / Environment Variables
 
 ### Done
-Everything is set, happy developing.
- - Development
-   - `bun run db:up` (ensure db is running)
-   - `bun run dev`
-   - `bun run docker:down` (or `docker compose down -v`)
- - Build
-   - `bun run docker:build` (ensure latest build)
-   - `bun run docker:up`
-   - `bun run docker:down` (or `docker compose down -v`)
- - Update DB structure
-   - `bun run docker:build` (ensure latest build)
-   - `bun run db:push`
+Everything is set. Happy developing.
+- Sync Convex Functions
+  - `bunx convex dev`
+- Development
+  - (Sync Convex Functions)
+  - `bun run dev`
+- Build Container
+  - `bun run docker:build`
+- Run Container
+  - Build Container (ensure latest build)
+  - `bun run docker:up`
+  - `bun run docker:down`
+    - (or `docker compose down -v` for also deleting volumes)
