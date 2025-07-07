@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl'
 import { SignInButton, UserButton } from '@clerk/nextjs'
 import { Authenticated, Unauthenticated } from 'convex/react'
 import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react'
+import { useTheme } from 'next-themes'
+import { dark } from '@clerk/themes'
 
 const navbarItems = [
   { key: 'page1', name: 'Page 1', href: '/page1' },
@@ -43,10 +45,17 @@ export function PagesNavbar() {
 }
 
 function UserNavbarContent() {
+  const { resolvedTheme: theme } = useTheme()
+
   return (
     <NavbarContent justify='end'><NavbarItem>
       <Authenticated>
-        <UserButton />
+        <UserButton appearance={{
+          baseTheme: theme === 'dark' ? dark : undefined,
+          layout: {
+            shimmer: false
+          }
+        }} />
       </Authenticated>
       <Unauthenticated>
         <SignInButton />
