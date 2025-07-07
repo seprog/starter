@@ -12,6 +12,7 @@
     "docker:down": "docker compose down"
   },
   "dependencies": {
+    "@clerk/localizations": "^3.17.3",
     "@clerk/nextjs": "^6.23.3",
     "@clerk/themes": "^2.2.54",
     "@heroui/react": "^2.8.0-beta.11",

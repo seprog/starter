@@ -58,7 +58,5 @@ Everything is set. Happy developing.
 
 ## TODO
 ToDo's regarding this template:
-- Clerk localization
-- Clerk UI customization (e.g. dark theme)
 - Cypress
 - CI
