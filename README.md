@@ -34,6 +34,7 @@ Steps to setup the project.
   - [Locale File (de)](/locales/de.json)
   - [Root Layout](/src/app/[locale]/layout.tsx)
   - [Readme File](/README.md)
+- [ ] customize [Favicon](/src/app/icon.svg)
 - [ ] set environment variables (e.g. [.env file](/.env))
   - Convex ([Dashboard](https://dashboard.convex.dev))
     - `CONVEX_DEPLOYMENT`
