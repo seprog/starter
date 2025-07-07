@@ -1,7 +1,5 @@
 # Starter
-
-Template Project including:
-
+Template project including:
 - Next
 - Docker
 - Zod
@@ -21,20 +19,18 @@ Template Project including:
   - GitHub
   - Cypress
 
-
-## TODO
-Steps to setup the project.
+## Setup
 - [ ] install dependencies
   - run `bun install`
 - [ ] replace `ghcr.io/seprog/starter:latest` with according GitHub Container Registry image
   - [Compose File](/docker-compose.yaml)
-- [ ] replace `starter` and `Starter` occurrences with according Project / Repository name
+- [ ] (optional / recommended) replace `starter` and `Starter` occurrences with according Project / Repository name
   - [Compose File](/docker-compose.yaml)
   - [Locale File (en)](/locales/en.json)
   - [Locale File (de)](/locales/de.json)
   - [Root Layout](/src/app/[locale]/layout.tsx)
   - [Readme File](/README.md)
-- [ ] customize [Favicon](/src/app/icon.svg)
+- [ ] (optional / recommended) customize [Favicon](/src/app/icon.svg)
 - [ ] set environment variables (e.g. [.env file](/.env))
   - Convex ([Dashboard](https://dashboard.convex.dev))
     - `CONVEX_DEPLOYMENT`
@@ -59,3 +55,10 @@ Everything is set. Happy developing.
   - `bun run docker:up`
   - `bun run docker:down`
     - (or `docker compose down -v` for also deleting volumes)
+
+## TODO
+ToDo's regarding this template:
+- Clerk localization
+- Clerk UI customization (e.g. dark theme)
+- Cypress
+- CI
