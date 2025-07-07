@@ -1,37 +1,40 @@
 'use client'
 
-import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { SignInButton, UserButton } from '@clerk/nextjs'
 import { Authenticated, Unauthenticated } from 'convex/react'
+import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react'
 
-export function MainNavbar({ items }: {
-  items?: {
-    key: React.Key
-    content: React.ReactNode
-  }[]
-}) {
+const navbarItems = [
+  { key: 'page1', name: 'Page 1', href: '/page1' },
+  { key: 'page2', name: 'Page 2', href: '/page2' }
+]
+
+export function PagesNavbar() {
   const t = useTranslations('navbar')
-  const locale = useLocale()
 
   return (
     <Navbar isBlurred isBordered maxWidth='full'>
       <NavbarMenuToggle className='md:hidden' />
       <NavbarMenu>
-        { items?.map(({ key, content }) => (
-          <NavbarMenuItem key={key}>{ content }</NavbarMenuItem>
+        { navbarItems?.map(({ key, name, href }) => (
+          <NavbarMenuItem key={key}>
+            <Link color='foreground' href={href}>{ name }</Link>
+          </NavbarMenuItem>
         )) }
       </NavbarMenu>
       <NavbarBrand>
         <Link
           className='text-xl font-bold'
           color='foreground'
-          href={`/${locale}`}
+          href='/'
         >{ t('title') }</Link>
       </NavbarBrand>
       <NavbarContent className='not-md:hidden'>
-        { items?.map(({ key, content }) => (
-          <NavbarItem key={key}>{ content }</NavbarItem>
+        { navbarItems?.map(({ key, name, href }) => (
+          <NavbarMenuItem key={key}>
+            <Link color='foreground' href={href}>{ name }</Link>
+          </NavbarMenuItem>
         )) }
       </NavbarContent>
       <UserNavbarContent />
