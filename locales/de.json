@@ -1,5 +1,7 @@
 {
   "navbar": {
-    "title": "Starter"
+    "title": "Starter",
+    "page1": "Seite 1",
+    "page2": "Seite 2"
   }
 }

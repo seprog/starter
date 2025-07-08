@@ -6,11 +6,7 @@ Template project including:
 - Localization
   - Next Intl (Default Setup: `en` & `de`)
 - UI
-  - Next Themes
-  - Framer Motion
-  - React Icons
-  - QR Code React
-  - Hero UI
+  - MUI
 - DB
   - Convex
 - Auth
