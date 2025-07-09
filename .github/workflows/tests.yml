@@ -27,8 +27,7 @@ jobs:
 
       - name: Start Docker Container
         run: |
-          docker compose up -d app db
-          bun run db:push
+          docker compose up -d app
 
       - name: Run Tests
         uses: cypress-io/github-action@v6
@@ -55,8 +54,7 @@ jobs:
 
       - name: Start Docker Container
         run: |
-          docker compose up -d app db
-          bun run db:push
+          docker compose up -d app
 
       - name: Run Tests
         uses: cypress-io/github-action@v6
@@ -84,8 +82,7 @@ jobs:
 
       - name: Start Docker Container
         run: |
-          docker compose up -d app db
-          bun run db:push
+          docker compose up -d app
 
       - name: Run Tests
         uses: cypress-io/github-action@v6
@@ -113,8 +110,7 @@ jobs:
 
       - name: Start Docker Container
         run: |
-          docker compose up -d app db
-          bun run db:push
+          docker compose up -d app
 
       - name: Run Tests
         uses: cypress-io/github-action@v6

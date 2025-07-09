@@ -10,7 +10,6 @@ runs:
     - uses: docker/build-push-action@v6
       with:
         load: true
-        push: false
         tags: ghcr.io/${{ github.repository }}:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

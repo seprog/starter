@@ -1,9 +1,7 @@
 {
   "navbar": {
     "title": "Starter",
-    "login": "Anmelden",
-    "logout": "Abmelden",
-    "profile": "Profil",
-    "settings": "Einstellungen"
+    "page1": "Seite 1",
+    "page2": "Seite 2"
   }
 }
