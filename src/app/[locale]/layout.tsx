@@ -7,6 +7,8 @@ import { ServerProviders } from '@/app/providers/serverProviders'
 import { ClientProviders } from '@/app/providers/clientProviders'
 import CssBaseline from '@mui/material/CssBaseline'
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'Starter'
@@ -25,6 +27,8 @@ export default async function RootLayout({ children, params }: Readonly<{
       suppressHydrationWarning
     >
       <body className='flex flex-col min-h-screen'>
+        <Analytics />
+        <SpeedInsights />
         <ServerProviders><ClientProviders>
           <InitColorSchemeScript attribute='data' />
           <CssBaseline />
