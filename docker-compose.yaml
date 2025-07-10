@@ -1,8 +1,0 @@
-name: starter
-
-services:
-  app:
-    image: ghcr.io/seprog/starter:latest
-    build: .
-    ports:
-      - 3000:3000
